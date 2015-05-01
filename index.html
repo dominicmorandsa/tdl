@@ -62,7 +62,7 @@
           <input type="text" ng-model="todoTitle"  size="30"
                  placeholder="add new todo here">
 
-          <input class="btn-primary" type="submit" value="Update" ng-click="updateTodo(todo)">
+          <input class="btn-primary" type="submit" value="Update" ng-click="updateTodo(todo, $index)">
           <input class="btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
         </form>
       </div><!-- /Edit Todo -->
@@ -71,12 +71,14 @@
       <ul class="list-unstyled">
         <li ng-repeat="todo in todos | filter:filterTodo | orderBy:'priorityValue' track by $index">
 
-          <input type="checkbox" ng-model="todo.complete">  
+          <input type="checkbox"  ng-model="todo.complete" ng-change="completeTodo(todo, $index)">  
           <!-- <button ng-click="editTodo(todo, $index)">Edit</button> -->
-          <button class="btn-primary"ng-click="editTodo(todo, $index)">
+          <button class="btn-primary" ng-click="editTodo(todo, $index)">
            {{todo.priorityName}} 
            {{todo.title}} 
-           {{$index}}</button>
+           {{$index}}
+           {{todo.complete}}
+          </button>
 
           <button class="btn-danger" ng-click="deleteTodo(todo)">Delete</button>
         </li>
