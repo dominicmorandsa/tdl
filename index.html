@@ -3,27 +3,88 @@
 <head>
   <meta charset="utf-8">
   <title>To Do List</title>
-  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/animations.css">
 
-  <script src="js/jquery.js"></script>
-  <script src="js/angular.js"></script>
-  <script src="js/angular-animate.js"></script>
-  <script src="js/angular-route.js"></script>
-  <script src="js/angular-resource.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/services.js"></script>
+  <script src="js/jquery/jquery.js"></script>
+  <script src="js/angular/angular.js"></script>
+  <script src="js/angular/angular-animate.js"></script>
+  <script src="js/angular/angular-route.js"></script>
+  <script src="js/angular/angular-resource.js"></script>
+  <script src="js/app/app.js"></script>
+  <script src="js/app/animations.js"></script>
+  <script src="js/app/controllers.js"></script>
+  <script src="js/app/filters.js"></script>
+  <script src="js/app/services.js"></script>
 </head>
 <body>
 
   <div class="view-container">
-    <div>tdl</div>
-    <div ng-view class="view-frame"></div>
-  </div>
+    <div ng-controller="TDLController">
+    To Do List
+
+      <!-- Filter -->
+
+      <div>
+        <form class="form-inline">
+        Filter
+          <button class="btn-primary"  ng-click="show='all'">All items</button>
+          <button class="btn-primary" ng-click="show='notdone'">To be done</button>
+          <button class="btn-primary" ng-click="show='done'">Complete</button>
+        </form>      
+      </div>
+
+      <!-- Add Todo -->
+      <div ng-hide="edit">
+        <form class="form-inline">
+          <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
+<!--             <option value="0">H</option>
+            <option value="1">M</option>
+            <option value="2" ng-selected="todoPriorityValue">L</option> -->
+          </select>
+
+          <input type="text" ng-model="todoTitle" size="30"
+                 placeholder="add new todo here">
+          <input class="btn-primary" type="submit" value="add" ng-click="addTodo()">
+        </form> 
+      </div><!-- /Add Todo -->
+
+      <!-- Edit Todo -->
+      <div ng-show="edit">
+        <form>
+
+          <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
+<!--             <option value={{priorities.value[0]}}>{{priorities.name[0]}}</option>
+            <option value="1">M</option>
+            <option value="2">L</option> -->
+          </select>
+          <input type="text" ng-model="todoTitle"  size="30"
+                 placeholder="add new todo here">
+
+          <input class="btn-primary" type="submit" value="Update" ng-click="updateTodo(todo)">
+          <input class="btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
+        </form>
+      </div><!-- /Edit Todo -->
+
+      <!-- List of Todos -->
+      <ul class="list-unstyled">
+        <li ng-repeat="todo in todos | filter:filterTodo | orderBy:'priorityValue' track by $index">
+
+          <input type="checkbox" ng-model="todo.complete">  
+          <!-- <button ng-click="editTodo(todo, $index)">Edit</button> -->
+          <button class="btn-primary"ng-click="editTodo(todo, $index)">
+           {{todo.priorityName}} 
+           {{todo.title}} 
+           {{$index}}</button>
+
+          <button class="btn-danger" ng-click="deleteTodo(todo)">Delete</button>
+        </li>
+      </ul><!-- List of Todos -->
+
+
+    </div><!-- /TDLController -->
+  </div><!-- /view container -->
 
 </body>
 </html>

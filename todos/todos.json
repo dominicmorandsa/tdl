@@ -1,0 +1,23 @@
+[
+    {
+        "title": "First thing to do.", 
+        "notes": "Design todo list app...", 
+        "dateDue": "2015/04/25", 
+        "priority": "low", 
+        "status": "pending"
+    },
+    {
+        "title": "Second thing to do", 
+        "notes": "Figure out local storage", 
+        "dateDue": "2015/04/26", 
+        "priority": "high", 
+        "status": "pending"
+    },
+    {
+        "title": "Third thing to do", 
+        "notes": "Figure out services", 
+        "dateDue": "2015/04/26", 
+        "priority": "normal", 
+        "status": "pending"
+    }
+]

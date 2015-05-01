@@ -1,0 +1,15 @@
+
+<div xng-repeat="todo in todos | filter:$index" >
+<h1>{{todos[0].title}}</h1>
+
+
+<p>{{todo.notes}}</p>
+
+<input type="text" ng-model="todo.title"/>
+<input type="text" ng-model="todo.notes"/>
+
+<a href="" ng-click="cancel()">Cancel</a>
+<a href="" ng-click="update()">Update</a>
+<a href="" ng-click="new()">New</a>
+
+</div>
