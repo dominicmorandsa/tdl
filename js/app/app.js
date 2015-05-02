@@ -1,7 +1,16 @@
+/*
+* Author: Dominic Moran
+* Assignment: WI2.0 Mobile Development, Digital Skills Academy
+* Student ID: D14126327
+* Date: 2015/05/02
+* Ref: angular.org
+*/
+
 /* App Module */
 angular.module('tdlApp', [])
   .controller('TDLController', function($scope) {
 
+// Load to do list from local storage
     $scope.getTodos = function() {
 
       if (localStorage.length != 0) 

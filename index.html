@@ -1,92 +1,97 @@
 <!doctype html>
 <html lang="en" ng-app="tdlApp">
+<!--
+* Author: Dominic Moran
+* Assignment: WI2.0 Mobile Development, Digital Skills Academy
+* Student ID: D14126327
+* Date: 2015/05/02
+* Ref: angular.org
+-->
 <head>
   <meta charset="utf-8">
   <title>To Do List</title>
   <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/animations.css">
-
-  <script src="js/jquery/jquery.js"></script>
-  <script src="js/angular/angular.js"></script>
-  <script src="js/angular/angular-animate.js"></script>
-  <script src="js/angular/angular-route.js"></script>
-  <script src="js/angular/angular-resource.js"></script>
-  <script src="js/app/app.js"></script>
-  <script src="js/app/animations.js"></script>
-  <script src="js/app/controllers.js"></script>
-  <script src="js/app/filters.js"></script>
-  <script src="js/app/services.js"></script>
 </head>
+
 <body>
 
-  <div class="view-container">
-    <div ng-controller="TDLController">
-    To Do List
-
-      <!-- Filter -->
-
-      <div>
-        <form class="form-inline">
-        Filter
-          <button class="btn-primary"  ng-click="show='all'">All items</button>
-          <button class="btn-primary" ng-click="show='notdone'">To be done</button>
-          <button class="btn-primary" ng-click="show='done'">Complete</button>
-        </form>      
+  <div ng-controller="TDLController">
+    <div class="container">
+    
+    <div>
+      <h1>To Do List
+      <button class="pull-right" ng-click="help=!help"><span class="glyphicon glyphicon-question-sign"></span></button>
+      </h1>
+      <div class="panel panel-default" ng-show="help">
+        <div class="panel-body">
+        Click list item text to edit<br>
+        List sorted by priority - H = High, M = Medium, L + Low 
+        </div>
       </div>
+    </div>
 
       <!-- Add Todo -->
-      <div ng-hide="edit">
-        <form class="form-inline">
-          <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
-<!--             <option value="0">H</option>
-            <option value="1">M</option>
-            <option value="2" ng-selected="todoPriorityValue">L</option> -->
-          </select>
+      <div class="panel panel-default" ng-hide="edit">
+        <div class="panel-body">
+          <form form-control>
+            <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
+            </select>
 
-          <input type="text" ng-model="todoTitle" size="30"
-                 placeholder="add new todo here">
-          <input class="btn-primary" type="submit" value="add" ng-click="addTodo()">
-        </form> 
+            <input class="" type="text" ng-model="todoTitle" size="40" placeholder="add new todo here">
+            <input class="btn btn-sm btn-primary" type="submit" value="add" ng-click="addTodo()">
+          </form>
+        </div>
       </div><!-- /Add Todo -->
+      
 
       <!-- Edit Todo -->
-      <div ng-show="edit">
-        <form>
-
-          <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
-<!--             <option value={{priorities.value[0]}}>{{priorities.name[0]}}</option>
-            <option value="1">M</option>
-            <option value="2">L</option> -->
-          </select>
-          <input type="text" ng-model="todoTitle"  size="30"
-                 placeholder="add new todo here">
-
-          <input class="btn-primary" type="submit" value="Update" ng-click="updateTodo(todo, $index)">
-          <input class="btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
-        </form>
+      <div class="panel panel-default" ng-show="edit">
+        <div class="panel-body">
+          <form form-control>
+            <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
+            </select>
+            <input type="text" ng-model="todoTitle"  size="30">
+            <input class="btn-sm btn-primary" type="submit" value="Update" ng-click="updateTodo(todo, $index)">
+            <input class="btn-sm btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
+          </form>
+        </div>
       </div><!-- /Edit Todo -->
 
+      <!-- Filter -->
+      <div>
+        <label><h3>Filter</h3></label>
+        <button class="btn btn-sm btn-primary"  ng-click="show='all'">All items</button>
+        <button class="btn btn-sm btn-warning" ng-click="show='notdone'">To be done</button>
+        <button class="btn btn-sm btn-success" ng-click="show='done'">Complete</button>
+      </div><!-- </Filter>       -->
+
+
       <!-- List of Todos -->
-      <ul class="list-unstyled">
-        <li ng-repeat="todo in todos | filter:filterTodo | orderBy:'priorityValue' track by $index">
+      <div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="todo in todos | filter:filterTodo | orderBy:'priorityValue' track by $index">
+            <input type="checkbox"  ng-model="todo.complete" ng-change="completeTodo(todo, $index)">  
+            <button class="btn btn-sm btn-default" disabled="disabled">
+             {{todo.priorityName}}
+            </button>
+            <button class="btn btn-sm btn-primary" ng-click="editTodo(todo, $index)"> 
+             {{todo.title}}          
+            </button>
+            <button class="btn btn-sm btn-danger pull-right" ng-click="deleteTodo(todo)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </li>
+        </ul>        
+      </div><!-- List of Todos -->
 
-          <input type="checkbox"  ng-model="todo.complete" ng-change="completeTodo(todo, $index)">  
-          <!-- <button ng-click="editTodo(todo, $index)">Edit</button> -->
-          <button class="btn-primary" ng-click="editTodo(todo, $index)">
-           {{todo.priorityName}} 
-           {{todo.title}} 
-           {{$index}}
-           {{todo.complete}}
-          </button>
+    </div><!-- /container -->
+  </div><!-- /TDLController -->
 
-          <button class="btn-danger" ng-click="deleteTodo(todo)">Delete</button>
-        </li>
-      </ul><!-- List of Todos -->
-
-
-    </div><!-- /TDLController -->
-  </div><!-- /view container -->
+<!-- Scripts -->
+  <script src="js/angular/angular.min.js"></script>
+  <script src="js/app/app.js"></script>
 
 </body>
 </html>

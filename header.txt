@@ -2,6 +2,6 @@
 * Author: Dominic Moran
 * Assignment: WI2.0 Mobile Development, Digital Skills Academy
 * Student ID: D14126327
-* Date: 2015/05/01
-* Ref: website link to code referenced or the book,authors name and page number
+* Date: 2015/05/02
+* Ref: angular.org
 -­‐-­‐>
