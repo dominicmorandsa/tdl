@@ -17,7 +17,7 @@ angular.module('tdlApp', [])
     $scope.todos = $scope.getTodos();
     $scope.filterShow = null;
     $scope.show = 'all';
-    $scope.sort = null;
+    $scope.help = false;
     $scope.edit = null;
     $scope.index = 0;
     $scope.priorities = [            //Name/Value for priorities
