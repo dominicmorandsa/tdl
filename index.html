@@ -10,9 +10,8 @@
 <head>
   <meta charset="utf-8">
   <title>To Do List</title>
-  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/animations.css">
+
+  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">  
 </head>
 
 <body>
@@ -27,7 +26,7 @@
       <div class="panel panel-default" ng-show="help">
         <div class="panel-body">
         Click list item text to edit<br>
-        List sorted by priority - H = High, M = Medium, L + Low 
+        List sorted by priority - H = High, M = Medium, L = Low 
         </div>
       </div>
     </div>
@@ -53,8 +52,8 @@
             <select  ng-model="myPriority" ng-options="priority.name for priority in priorities">
             </select>
             <input type="text" ng-model="todoTitle"  size="30">
-            <input class="btn-sm btn-primary" type="submit" value="Update" ng-click="updateTodo(todo, $index)">
-            <input class="btn-sm btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
+            <input class="btn btn-sm btn-primary" type="submit" value="Update" ng-click="updateTodo(todo, $index)">
+            <input class="btn btn-sm btn-primary" type="submit" value="Cancel" ng-click="cancelUpdateTodo()">
           </form>
         </div>
       </div><!-- /Edit Todo -->

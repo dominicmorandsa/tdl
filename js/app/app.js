@@ -12,16 +12,15 @@ angular.module('tdlApp', [])
 
 // Load to do list from local storage
     $scope.getTodos = function() {
-
-      if (localStorage.length != 0) 
+      var lsData = JSON.parse(localStorage.getItem('tld'));
+      if (lsData) 
         {
-          return JSON.parse(localStorage.getItem('tdl'));
+          return JSON.parse(localStorage.getItem('tld'));
         } else {
           return [];
         }
-
-      return JSON.parse(localStorage.getItem('tdl'));
     }
+
 
     $scope.todos = $scope.getTodos();
     $scope.filterShow = null;
@@ -106,7 +105,7 @@ angular.module('tdlApp', [])
 
 // Save todos to localStorage
   $scope.saveTodos = function(data) {
-    localStorage.setItem('tdl', JSON.stringify(data));
+    localStorage.setItem('tld', JSON.stringify(data));
   }
 
 });
